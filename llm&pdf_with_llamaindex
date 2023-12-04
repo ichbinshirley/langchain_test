@@ -17,14 +17,15 @@ loader = PDFReader()
 documents = loader.load_data(file=Path('your file path'))
 
 
-# 指定文档分块大小，指定llm
+# 文档分割，默认embedding model是openai，指定llm为gpt 3.5turbo
+# service context 在llamaindex用于存放index和query的类
 service_context = ServiceContext.from_defaults(chunk_size=500, llm=OpenAI())
 
 # 向量存储，向量数据库为chroma
 chroma_client = chromadb.PersistentClient()
 chroma_collection = chroma_client.create_collection('llamaindex_test1')
-vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
-storage_context = StorageContext.from_defaults(vector_store=vector_store)
+vector_store = ChromaVectorStore(chroma_collection=chroma_collection)   
+storage_context = StorageContext.from_defaults(vector_store=vector_store) # storage context在llamaindex用于存放nodes类
 
 # 创建索引
 index = VectorStoreIndex.from_documents(documents,
