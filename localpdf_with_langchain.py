@@ -11,7 +11,7 @@ from langchain.callbacks import StdOutCallbackHandler
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
 # 加载文档
-loader = PyPDFLoader('/Users/shirley/Documents/Apps/chroma/绩效管理的定义.pdf')
+loader = PyPDFLoader('your file path')
 pages = loader.load()
 
 # 文本分割
